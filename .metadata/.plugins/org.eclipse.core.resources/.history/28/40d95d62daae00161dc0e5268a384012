@@ -1,0 +1,11 @@
+package game;
+
+import engine.rendering.shapes.Oval;
+
+public class Body {
+	public Oval shape;
+	
+	public Body() {
+		
+	}
+}

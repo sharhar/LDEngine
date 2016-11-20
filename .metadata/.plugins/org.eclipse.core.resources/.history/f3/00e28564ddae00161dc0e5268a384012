@@ -1,0 +1,23 @@
+package game;
+
+import java.awt.Graphics;
+
+import engine.utils.math.Vector2f;
+
+public class GameController {
+	
+	public static void init() {
+		Universe.bodies.add(new Body(new Vector2f(200, 200), 10, 10));
+		Universe.bodies.add(new Body(new Vector2f(200, 200), 10, 10));
+		Universe.bodies.add(new Body(new Vector2f(200, 200), 10, 10));
+	}
+	
+	public static void render() {
+		Universe.tick(0);
+		Universe.render();
+	}
+	
+	public static void postRender(Graphics g) {
+		
+	}
+}

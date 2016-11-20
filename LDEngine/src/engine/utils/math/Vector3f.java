@@ -12,9 +12,15 @@ public class Vector3f extends Vector2f{
 		super();
 		this.z = 0;
 	}
+	
+	public void add(Vector3f other) {
+		x += other.x;
+		y += other.y;
+		z += other.z;
+	}
 
-	@Override
-	public boolean equals(Vector4f other) {
+	
+	public boolean equals(Vector3f other) {
 		return this.x == other.x && this.y == other.y && this.z == other.z;
 	}
 	

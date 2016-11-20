@@ -1,0 +1,5 @@
+package game;
+
+public class Universe {
+	public static ArrayList<Body> bodies;
+}

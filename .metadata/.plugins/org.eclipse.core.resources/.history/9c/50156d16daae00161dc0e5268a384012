@@ -1,0 +1,32 @@
+package game;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+
+import engine.input.Keyboard;
+import engine.rendering.Texture;
+import engine.rendering.shapes.Oval;
+import engine.rendering.shapes.QuadAA;
+import engine.sound.Sound;
+import engine.utils.math.Vector2f;
+import engine.utils.math.Vector4f;
+import engine.utils.physics.Collision;
+
+public class GameController {
+	
+	
+	public static void init() {
+		
+	}
+	
+	public static void render() {
+		
+	}
+	
+	public static void postRender(Graphics g) {
+		
+	}
+}

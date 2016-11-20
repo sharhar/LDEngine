@@ -12,4 +12,6 @@ public class Color {
 	public int getIntRGB() {
 		return 0xff000000 | ((int)(r*255)) << 16 | ((int)(g*255)) << 8 | ((int)(b*255));
 	}
+	
+	
 }

@@ -13,7 +13,13 @@ public class Vector4f extends Vector3f{
 		this.w = 1;
 	}
 	
-	@Override
+	public void add(Vector4f other) {
+		x += other.x;
+		y += other.y;
+		z += other.z;
+		w += other.w;
+	}
+	
 	public boolean equals(Vector4f other) {
 		return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
 	}
