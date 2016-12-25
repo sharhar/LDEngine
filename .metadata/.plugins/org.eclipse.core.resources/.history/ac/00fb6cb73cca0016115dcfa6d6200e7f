@@ -1,0 +1,22 @@
+package game;
+
+import net.ddns.sharhar.tcp.TcpClient;
+import net.ddns.sharhar.tcp.TcpClientCallback;
+
+public class OnlineGame implements TcpClientCallback{
+	
+	public TcpClient login;
+	
+	public OnlineGame(int port) {
+		login = new TcpClient(GameController.client.client.address, port, this);
+		login.start();
+	}
+	
+	public void connected() {
+		
+	}
+
+	public void receivedData(String data) {
+		
+	}
+}

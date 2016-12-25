@@ -1,0 +1,26 @@
+package game.entities;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import engine.rendering.Texture;
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+
+public abstract class Hero extends QuadAA{
+	
+	public static Texture[] tex;
+	private static int size_x = 50;
+	private static int size_y = 50;
+	
+	static {
+		tex = new Texture(img);
+	}
+
+	public Hero(Vector2f pos) {
+		super(pos, new Vector2f(size_x, size_y), tex[0]);
+	}
+	
+	abstract public void tick();
+}

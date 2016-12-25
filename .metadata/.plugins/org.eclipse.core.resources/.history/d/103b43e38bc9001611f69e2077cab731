@@ -1,0 +1,19 @@
+package server;
+
+import java.util.HashMap;
+
+import utils.FileUtils;
+
+public class Server {
+	public static HashMap<String, String> props = new HashMap<String, String>();
+	
+	public static void main(String[] args) {
+		String conf = FileUtils.loadAsString("server.conf");
+		
+		for(String line:conf.split("\n")) {
+			if(!line.equals("")) {
+				
+			}
+		}
+	}
+}

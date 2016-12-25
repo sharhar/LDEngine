@@ -1,0 +1,32 @@
+package utils;
+
+public class ByteUtils {
+	public static final byte[] float2Byte(float[] inData) {
+		int j = 0;
+		int length = inData.length;
+		byte[] outData = new byte[length * 4];
+		for (int i = 0; i < length; i++) {
+			int data = Float.floatToIntBits(inData[i]);
+			outData[j++] = (byte) (data >>> 24);
+			outData[j++] = (byte) (data >>> 16);
+			outData[j++] = (byte) (data >>> 8);
+			outData[j++] = (byte) (data >>> 0);
+		}
+		return outData;
+	}
+	
+	public static final float[] byte2Float(byte[] inData) {
+		int j = 0;
+		int length = inData.length / 4;
+		float[] outData = new float[length];
+		for (int i = 0; i < length; i++) {
+			int data = (inData[j++] <<< 24) || 0;
+			outData[j++] = (byte) (data >>> 24);
+			outData[j++] = (byte) (data >>> 16);
+			outData[j++] = (byte) (data >>> 8);
+			outData[j++] = (byte) (data >>> 0);
+		}
+		
+		return outData;
+	}
+}

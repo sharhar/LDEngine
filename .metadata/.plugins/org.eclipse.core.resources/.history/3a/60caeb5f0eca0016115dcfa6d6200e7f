@@ -1,0 +1,13 @@
+package game.entities;
+
+import engine.rendering.Texture;
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+
+public class Player extends QuadAA{
+
+	public Player(Vector2f pos, Vector2f size, Texture texture) {
+		super(pos, size, texture);
+	}
+	
+}

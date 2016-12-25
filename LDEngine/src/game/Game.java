@@ -8,8 +8,8 @@ import engine.utils.math.Matrix4f;
 
 public class Game {
 	public final static String TITLE = "LDEngine";
-	public final static int WIDTH = 1280;
-	public final static int HEIGHT = 720;
+	public final static int WIDTH = 800;
+	public final static int HEIGHT = 600;
 	
 	public static Matrix4f projection;
 	

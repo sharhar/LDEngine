@@ -1,0 +1,26 @@
+package game;
+
+import java.awt.Graphics;
+
+import engine.ui.View;
+import game.entities.Hero;
+import game.entities.PlayerHero;
+
+public class PracticeGame extends View{
+	
+	private Hero[] heros;
+	
+	public PracticeGame(int heroNum) {
+		heros = new Hero[heroNum];
+		
+		heros[0] = new PlayerHero(pos);
+	}
+	
+	public void render() {
+		
+	}
+
+	public void postRender(Graphics g) {
+		
+	}
+}

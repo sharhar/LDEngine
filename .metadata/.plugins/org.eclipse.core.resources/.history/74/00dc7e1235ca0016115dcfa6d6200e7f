@@ -1,0 +1,37 @@
+package game.ui;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import engine.utils.math.Vector2f;
+import game.entities.AIHero;
+import game.entities.Hero;
+import game.entities.PlayerHero;
+
+import javax.swing.JList;
+
+public class GameSelect extends JFrame {
+	private static final long serialVersionUID = 2838753828074383045L;
+	private JPanel contentPane;
+
+	/**
+	 * Create the frame.
+	 */
+	public GameSelect() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 448, 413);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		Hero[] heros = {new PlayerHero(new Vector2f(), null), new AIHero(new Vector2f())};
+		JList<Hero> list = new JList<Hero>(heros);
+		list.setBounds(10, 11, 163, 110);
+		
+		contentPane.add(list);
+		setVisible(true);
+	}
+}

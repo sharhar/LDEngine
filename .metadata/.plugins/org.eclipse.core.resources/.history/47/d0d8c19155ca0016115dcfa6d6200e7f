@@ -1,0 +1,12 @@
+package game.entities;
+
+import engine.utils.math.Vector2f;
+import game.GameView;
+
+public class OnlinePlayerHero extends PlayerHero{
+
+	public OnlinePlayerHero(Vector2f pos, GameView view) {
+		super(pos, view);
+	}
+
+}

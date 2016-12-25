@@ -1,0 +1,47 @@
+package game.entities;
+
+import java.awt.event.KeyEvent;
+
+import engine.input.Keyboard;
+import engine.utils.math.Vector2f;
+import game.Game;
+import game.GameView;
+
+public class PlayerHero extends Hero{
+	
+	float G = -400;
+	float yVel = 0;
+	float jumpHeight = 300;
+	private boolean jumped = false;
+	private GameView view;
+
+	public PlayerHero(Vector2f pos, GameView view) {
+		super(pos);
+		
+		
+	}
+	
+	public void tick() {
+		float speed = 400;
+		
+		if(Keyboard.keys[KeyEvent.VK_A]) {
+			pos.x -= speed * Game.deltaTime;
+		}
+		
+		if(Keyboard.keys[KeyEvent.VK_D]) {
+			pos.x += speed * Game.deltaTime;
+		}
+		
+		if(Keyboard.keys[KeyEvent.VK_W] && !jumped) {
+			yVel = (float) Math.sqrt(-2*jumpHeight*G);
+			jumped = true;
+		}
+		
+		if(!Keyboard.keys[KeyEvent.VK_W]) {
+			jumped = false;
+		}
+		
+		yVel += G * Game.deltaTime;
+		pos.y += yVel * Game.deltaTime;
+	}
+}

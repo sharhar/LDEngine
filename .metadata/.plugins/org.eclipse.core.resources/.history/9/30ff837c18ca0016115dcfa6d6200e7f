@@ -1,0 +1,26 @@
+package game.entities;
+
+import engine.rendering.shapes.QuadAA;
+import engine.utils.physics.Collision;
+
+public class Level{
+	public QuadAA[] quads;
+	
+	public Level(QuadAA[] quads) {
+		this.quads = quads;
+	}
+	
+	public boolean col(QuadAA other) {
+		for(QuadAA q:quads) {
+			if(Collision.qq(other, q))
+				return true;
+		}
+		return false;
+	}
+	
+	public void render() {
+		for(QuadAA q:quads) {
+			q.draw();
+		}
+	}
+}

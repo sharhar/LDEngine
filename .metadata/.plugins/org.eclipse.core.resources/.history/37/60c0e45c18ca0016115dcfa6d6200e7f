@@ -1,0 +1,22 @@
+package game.entities;
+
+import engine.rendering.shapes.QuadAA;
+
+public class Level{
+	public QuadAA[] quads;
+	
+	public Level(QuadAA[] quads) {
+		this.quads = quads;
+	}
+	
+	public boolean col(QuadAA other) {
+		return false;
+		
+	}
+	
+	public void render() {
+		for(QuadAA q:quads) {
+			q.draw();
+		}
+	}
+}

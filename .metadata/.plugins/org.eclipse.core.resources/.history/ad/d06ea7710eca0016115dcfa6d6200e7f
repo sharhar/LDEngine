@@ -1,0 +1,22 @@
+package game.entities;
+
+import java.awt.image.BufferedImage;
+
+import engine.rendering.Texture;
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+import game.Game;
+
+public class Player extends QuadAA{
+	
+	public static Texture tex;
+	
+	static {
+		BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+	}
+
+	public Player(Vector2f pos, Vector2f size, Texture texture) {
+		super(pos, size, texture);
+	}
+	
+}

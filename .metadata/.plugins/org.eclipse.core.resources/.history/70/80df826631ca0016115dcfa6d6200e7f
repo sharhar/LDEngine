@@ -1,0 +1,51 @@
+package server;
+
+import java.util.HashMap;
+
+import net.ddns.sharhar.tcp.TcpServer;
+import net.ddns.sharhar.tcp.TcpServer.TcpServerClient;
+import net.ddns.sharhar.tcp.TcpServerCallback;
+import utils.FileUtils;
+
+public class Server implements TcpServerCallback{
+	public static HashMap<String, String> props;
+	public static TcpServer connectionServer;
+	public static int port;
+	public static int gamePortsStart;
+	public static int gamePortsNum;
+	public static int gamePortsEnd;
+	
+	public static void main(String[] args) {
+		new Server();
+	}
+	
+	public Server() {
+		String conf = FileUtils.loadAsString("server.conf");
+		
+		props = new HashMap<String, String>();
+		for(String line:conf.split("\n")) {
+			if(!line.equals("")) {
+				String[] temp = line.split(" ");
+				props.put(temp[0].toUpperCase(), temp[1]);
+			}
+		}
+		
+		port = Integer.parseInt(props.get("PORT"));
+		String[] gps = props.get("GAMEPORTS").split("-");
+		gamePortsStart = Integer.parseInt(gps[0]);
+		gamePortsEnd = Integer.parseInt(gps[1]) + 1;
+		gamePortsNum = gamePortsEnd - gamePortsStart;
+		
+		connectionServer = new TcpServer(port, this);
+		
+		connectionServer.start();
+	}
+	
+	public void receivedData(int id, TcpServerClient client, String data) {
+		
+	}
+
+	public void connected(int id, TcpServerClient client) {
+		client.socket.getInetAddress();
+	}
+}

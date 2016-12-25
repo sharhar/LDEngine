@@ -1,0 +1,86 @@
+package engine;
+
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
+
+import engine.input.Keyboard;
+import engine.input.Mouse;
+import game.Game;
+
+public class FrameMain extends Canvas{
+	private static final long serialVersionUID = 2382243435487294815L;
+	
+	public static JFrame frame;
+	public static Thread thread;
+	public static BufferStrategy bs;
+	public static boolean open = true;
+	
+	public static void main(String[] args) {
+		FrameMain game = new FrameMain();
+		frame = new JFrame(Game.TITLE);
+		
+		Game.init();
+		
+		Mouse.init();
+		Mouse mouse = new Mouse();
+		
+		Keyboard.init();
+		Keyboard keyboard = new Keyboard();
+		
+		game.addMouseListener(mouse);
+		game.addMouseMotionListener(mouse);
+		game.addKeyListener(keyboard);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(100, 100);
+		frame.add(game);
+		frame.pack();
+		
+		game.requestFocusInWindow();
+		
+		Insets insects = frame.getInsets();
+		frame.setSize(Game.WIDTH + insects.right + insects.left, Game.HEIGHT + insects.top + insects.bottom);
+		
+		BufferedImage icon = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_INT_ARGB);
+		Graphics gr = icon.getGraphics();
+		Game.render(gr);
+		gr.dispose();
+		
+		int size = 64;
+		frame.setIconImage(icon.getSubimage(Game.WIDTH/2 - size, Game.HEIGHT/2 - size, size*2, size*2));
+		
+		frame.setResizable(true);
+		frame.setVisible(true);
+		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        FrameMain.open = false;
+		    }
+		});
+		
+		game.createBufferStrategy(2);
+		bs = game.getBufferStrategy();
+		
+		thread = new Thread(() -> {
+			while(FrameMain.open) {
+				Graphics g = bs.getDrawGraphics();
+				Game.render(g);
+				g.dispose();
+				bs.show();
+			}
+		});
+		
+		thread.start();
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}

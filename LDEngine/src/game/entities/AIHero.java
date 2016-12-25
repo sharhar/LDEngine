@@ -1,0 +1,14 @@
+package game.entities;
+
+import engine.utils.math.Vector2f;
+
+public class AIHero extends Hero{
+
+	public AIHero(Vector2f pos) {
+		super(pos);
+	}
+
+	public void tick() {
+		
+	}
+}

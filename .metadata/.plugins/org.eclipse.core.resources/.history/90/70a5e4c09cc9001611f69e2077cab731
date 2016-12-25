@@ -1,0 +1,67 @@
+package game.ui;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import game.GameClient;
+import game.GameController;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+public class ConnectionPrompt extends JFrame {
+	private static final long serialVersionUID = -9048790772587572442L;
+	
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	
+	public ConnectionPrompt() {
+		setResizable(false);
+		setTitle("Connection");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(450, 250, 250, 200);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblServerIp = new JLabel("Server IP:");
+		lblServerIp.setBounds(32, 52, 74, 14);
+		contentPane.add(lblServerIp);
+		
+		textField = new JTextField();
+		textField.setBounds(116, 49, 118, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblServerPort = new JLabel("Server Port:");
+		lblServerPort.setBounds(32, 83, 74, 14);
+		contentPane.add(lblServerPort);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(116, 80, 118, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnConnect = new JButton("Connect");
+		btnConnect.setBounds(77, 120, 89, 23);
+		btnConnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String server = textField.getText();
+				int port = Integer.parseInt(textField_1.getText());
+				
+				GameController.client = new GameClient(server, port);
+				GameController.connected = GameController.client.client.isConnected();
+			}
+		});
+		contentPane.add(btnConnect);
+		setVisible(true);
+	}
+}

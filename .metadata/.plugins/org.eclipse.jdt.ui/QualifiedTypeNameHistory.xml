@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="engine.rendering.shapes.Oval"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="engine.utils.math.Vector4f"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
+<fullyQualifiedTypeName name="engine.utils.physics.Collision"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Executors"/>
+<fullyQualifiedTypeName name="java.awt.event.WindowStateListener"/>
+<fullyQualifiedTypeName name="java.awt.Window"/>
+<fullyQualifiedTypeName name="java.awt.Frame"/>
+<fullyQualifiedTypeName name="game.Universe"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="utils.FileUtils"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="net.ddns.sharhar.tcp.TcpServerCallback"/>
+<fullyQualifiedTypeName name="net.ddns.sharhar.tcp.TcpServer"/>
+<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+<fullyQualifiedTypeName name="engine.rendering.shapes.QuadAA"/>
+<fullyQualifiedTypeName name="engine.utils.math.Vector2f"/>
+<fullyQualifiedTypeName name="engine.rendering.Texture"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="engine.ui.ButtonCallback"/>
+<fullyQualifiedTypeName name="engine.ui.Button"/>
+<fullyQualifiedTypeName name="java.awt.Rectangle"/>
+<fullyQualifiedTypeName name="engine.input.Mouse"/>
+<fullyQualifiedTypeName name="game.ui.ConnectionPrompt"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="net.ddns.sharhar.tcp.TcpClientCallback"/>
+<fullyQualifiedTypeName name="net.ddns.sharhar.tcp.TcpClient"/>
+<fullyQualifiedTypeName name="game.GameClient"/>
+<fullyQualifiedTypeName name="game.GameController"/>
+</qualifiedTypeNameHistroy>

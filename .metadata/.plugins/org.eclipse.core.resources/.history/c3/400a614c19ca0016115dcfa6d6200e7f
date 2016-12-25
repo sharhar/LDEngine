@@ -1,0 +1,7 @@
+package game;
+
+import game.entities.Level;
+
+public class GameView {
+	private Level level;
+}

@@ -1,0 +1,60 @@
+package game;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import engine.rendering.Texture;
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+import game.entities.AIHero;
+import game.entities.Hero;
+import game.entities.Level;
+import game.entities.PlayerHero;
+
+public class PracticeGame extends GameView{
+	
+	private Hero[] heros;
+	
+	public PracticeGame(int heroNum) {
+		heros = new Hero[heroNum];
+		
+		heros[0] = new PlayerHero(new Vector2f(200, 300), this);
+		
+		for(int i = 1;i < heros.length;i++) {
+			heros[i] = new AIHero(new Vector2f(100 + i*100, 100));
+		}
+		
+		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = img.getGraphics();
+		g.setColor(Color.black);
+		g.fillRect(0, 0, 1, 1);
+		g.dispose();
+		
+		Texture tex = new Texture(img);
+		
+		QuadAA[] quads = new QuadAA[1];
+		quads[0] = new QuadAA(new Vector2f(Game.WIDTH/2, 100), new Vector2f(400, 40), tex);
+		
+		Vector2f[] spawns = new Vector2f[1];
+		spawns[0] = new Vector2f();
+		
+		level = new Level(quads);
+	}
+	
+	public void render() {
+		level.render();
+		
+		for(Hero h:heros) {
+			h.tick();
+		}
+		
+		for(Hero h:heros) {
+			h.draw();
+		}
+	}
+
+	public void postRender(Graphics g) {
+		
+	}
+}

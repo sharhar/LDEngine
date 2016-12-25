@@ -1,0 +1,31 @@
+package engine.ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+public class Button {
+	public Rectangle rect;
+	public String text;
+	public ButtonCallback callBack;
+	private static Font font = new Font("Arial", Font.PLAIN, 40);
+	
+	public Button(Rectangle rect, String text, ButtonCallback callBack) {
+		this.rect = rect;
+		this.text = text;
+		this.callBack = callBack;
+	}
+	
+	public void render(Graphics g) {
+		g.setColor(Color.gray);
+		g.fillRect(rect.x, rect.y, rect.width, rect.height);
+		g.setColor(Color.BLACK);
+		g.setFont(font);
+		g.drawString(text, rect.x + 5, rect.y + 40);
+	}
+	
+	public void tick() {
+		
+	}
+}

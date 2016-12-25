@@ -1,0 +1,30 @@
+package game.ui;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.List;
+
+public class GameSelect extends JFrame {
+	private static final long serialVersionUID = 2838753828074383045L;
+	private JPanel contentPane;
+	
+	public int selection = -1;
+	
+	public GameSelect(String[] servers) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 448, 413);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		List list = new List();
+		list.setBounds(10, 10, 412, 222);
+		for(String s: servers) {
+			
+		}
+		contentPane.add(list);
+		setVisible(true);
+	}
+}

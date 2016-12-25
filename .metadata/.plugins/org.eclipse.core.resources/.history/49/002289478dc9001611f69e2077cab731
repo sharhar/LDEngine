@@ -1,0 +1,31 @@
+package game;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import engine.rendering.shapes.QuadAA;
+
+public class GameController {
+	
+	private static QuadAA bg;
+	public static boolean connected = false;
+	
+	public static void init() {
+		Game.printFPS = true;
+		
+	}
+	
+	public static void render() {
+		
+	}
+	
+	public static void postRender(Graphics g) {
+		if(connected) {
+			
+		} else {
+			g.setColor(Color.RED);
+			g.setFont(font);;
+			g.drawString("Offline", 30, 10);
+		}
+	}
+}

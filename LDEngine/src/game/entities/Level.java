@@ -1,0 +1,30 @@
+package game.entities;
+
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+import engine.utils.physics.Collision;
+
+public class Level{
+	public QuadAA[] quads;
+	public Vector2f[] spawns;
+	
+	public Level(QuadAA[] quads, Vector2f[] spawns) {
+		this.quads = quads;
+		this.spawns = spawns;
+	}
+	
+	public boolean col(QuadAA other) {
+		for(QuadAA q:quads) {
+			if(Collision.qq(q, other)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void render() {
+		for(QuadAA q:quads) {
+			q.draw();
+		}
+	}
+}

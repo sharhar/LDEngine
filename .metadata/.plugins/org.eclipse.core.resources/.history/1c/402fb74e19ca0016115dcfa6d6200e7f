@@ -1,0 +1,7 @@
+package game;
+
+import game.entities.Level;
+
+abstract public class GameView extends View{
+	private Level level;
+}

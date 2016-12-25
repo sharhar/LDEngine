@@ -1,0 +1,21 @@
+package game.entities;
+
+import java.awt.event.KeyEvent;
+
+import engine.input.Keyboard;
+import engine.utils.math.Vector2f;
+
+public class PlayerHero extends Hero{
+
+	public PlayerHero(Vector2f pos) {
+		super(pos);
+	}
+	
+	public void tick() {
+		float speed = 100;
+		
+		if(Keyboard.keys[KeyEvent.VK_W]) {
+			pos.y
+		}
+	}
+}

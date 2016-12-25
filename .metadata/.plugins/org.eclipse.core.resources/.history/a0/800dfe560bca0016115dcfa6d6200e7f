@@ -1,0 +1,70 @@
+package engine.ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import engine.input.Mouse;
+
+public class Button {
+	public Rectangle rect;
+	public String text;
+	public ButtonCallback callBack;
+	public boolean hovering = false;
+	public boolean greyedOut = false;
+	private boolean pressing = false;
+	private static Font font = new Font("Arial", Font.PLAIN, 40);
+	
+	public Button(Rectangle rect, String text, ButtonCallback callBack) {
+		this.rect = rect;
+		this.text = text;
+		this.callBack = callBack;
+	}
+	
+	public void render(Graphics g) {
+		int border = 4;
+		g.setColor(Color.black);
+		g.fillRect(rect.x - border, rect.y - border, rect.width + border*2, rect.height + border*2);
+		if(pressing) {
+			g.setColor(Color.darkGray);
+		} else if(hovering) {
+			g.setColor(Color.gray);
+		} else {
+			g.setColor(Color.lightGray);
+		}
+		g.fillRect(rect.x, rect.y, rect.width, rect.height);
+		g.setColor(Color.black);
+		g.setFont(font);
+		g.drawString(text, rect.x + 5 + 2, rect.y + 40 + 2);
+		
+		if(greyedOut) {
+			
+		}
+	}
+	
+	public void tick() {
+		if(greyedOut) {
+			return;
+		}
+		
+		hovering = true;
+		
+		if(rect.x + rect.width < Mouse.posX || Mouse.posX < rect.x) {
+			hovering = false;
+		}
+			
+		if(rect.y + rect.height < Mouse.posY || Mouse.posY < rect.y) {
+			hovering = false;
+		}
+		
+		if(hovering && Mouse.mouseLeftPressed && !pressing) {
+			callBack.pressed();
+			pressing = true;
+		}
+		
+		if(!hovering || !Mouse.mouseLeftPressed) {
+			pressing = false;
+		}
+	}
+}

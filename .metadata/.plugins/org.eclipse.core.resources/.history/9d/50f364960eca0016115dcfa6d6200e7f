@@ -1,0 +1,30 @@
+package game.entities;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import engine.rendering.Texture;
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+import game.Game;
+
+public class Player extends QuadAA{
+	
+	public static Texture tex;
+	
+	static {
+		BufferedImage img = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = img.getGraphics();
+		g.setColor(Color.black);
+		g.fillOval(0, 0, 64, 64);
+		g.dispose();
+		
+		tex = new Texture(img);
+	}
+
+	public Player(Vector2f pos, Vector2f size, Texture texture) {
+		super(pos, size, tex);
+	}
+	
+}

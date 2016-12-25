@@ -1,0 +1,44 @@
+package game.ui;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JProgressBar;
+import javax.swing.JList;
+import java.awt.Choice;
+import java.awt.List;
+
+public class GameSelect extends JFrame {
+	private static final long serialVersionUID = 2838753828074383045L;
+	private JPanel contentPane;
+
+	/**
+	 * Create the frame.
+	 */
+	public GameSelect() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 448, 413);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JList list = new JList();
+		list.setBounds(10, 11, 163, 110);
+		contentPane.add(list);
+		
+		Choice choice = new Choice();
+		choice.setBounds(29, 190, 163, 55);
+		choice.add("Game 1");
+		choice.add("Game 2");
+		choice.add("Game 3");
+		choice.add("Game 4");
+		contentPane.add(choice);
+		
+		List list_1 = new List();
+		list_1.setBounds(40, 269, 110, 60);
+		list_1.add("");
+		contentPane.add(list_1);
+		setVisible(true);
+	}
+}

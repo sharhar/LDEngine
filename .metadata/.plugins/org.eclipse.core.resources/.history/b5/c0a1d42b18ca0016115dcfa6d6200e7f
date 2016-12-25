@@ -1,0 +1,11 @@
+package game.entities;
+
+import engine.rendering.shapes.QuadAA;
+
+public class Level{
+	public QuadAA[] quads;
+	
+	public Level() {
+		
+	}
+}

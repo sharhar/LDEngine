@@ -1,0 +1,22 @@
+package game;
+
+import java.awt.Graphics;
+
+import engine.ui.View;
+
+public class PracticeGame extends View{
+	
+	
+	
+	public PracticeGame() {
+		
+	}
+	
+	public void render() {
+		
+	}
+
+	public void postRender(Graphics g) {
+		
+	}
+}

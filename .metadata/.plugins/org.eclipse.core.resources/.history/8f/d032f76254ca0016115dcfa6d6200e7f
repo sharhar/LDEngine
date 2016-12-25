@@ -1,0 +1,43 @@
+package game;
+
+import java.awt.Graphics;
+
+import engine.ui.View;
+import net.ddns.sharhar.tcp.TcpClient;
+import net.ddns.sharhar.tcp.TcpClientCallback;
+import net.ddns.sharhar.udp.UdpClient;
+import net.ddns.sharhar.udp.UdpClientCallback;
+
+public class OnlineGame extends View implements TcpClientCallback, UdpClientCallback{
+	
+	public TcpClient login;
+	public UdpClient client;
+	
+	public OnlineGame(int port) {
+		login = new TcpClient(GameController.client.client.address, port, this);
+		login.start();
+		
+		client = new UdpClient(GameController.client.client.address, port, this);
+		client.start();
+	}
+	
+	public void connected() {
+		
+	}
+
+	public void receivedData(String data) {
+		
+	}
+	
+	public void render() {
+		
+	}
+
+	public void postRender(Graphics g) {
+		
+	}
+	
+	public void receivedData(byte[] data) {
+		
+	}
+}

@@ -1,0 +1,38 @@
+package game;
+
+import java.awt.Graphics;
+
+import engine.ui.View;
+import engine.utils.math.Vector2f;
+import game.entities.AIHero;
+import game.entities.Hero;
+import game.entities.PlayerHero;
+
+public class PracticeGame extends View{
+	
+	private Hero[] heros;
+	
+	public PracticeGame(int heroNum) {
+		heros = new Hero[heroNum];
+		
+		heros[0] = new PlayerHero(new Vector2f(200, 300));
+		
+		for(int i = 1;i < heros.length;i++) {
+			heros[i] = new AIHero(new Vector2f(100 + i*100, 100));
+		}
+	}
+	
+	public void render() {
+		for(Hero h:heros) {
+			h.tick();
+		}
+		
+		for(Hero h:heros) {
+			h.draw();
+		}
+	}
+
+	public void postRender(Graphics g) {
+		
+	}
+}

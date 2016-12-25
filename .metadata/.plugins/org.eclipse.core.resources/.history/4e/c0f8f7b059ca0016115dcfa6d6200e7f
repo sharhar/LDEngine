@@ -1,0 +1,28 @@
+package game.entities;
+
+import engine.rendering.Renderer;
+import engine.utils.math.Vector2f;
+import game.GameView;
+
+public class OnlinePlayerHero extends PlayerHero{
+	
+	public Vector2f actPos;
+	
+	public OnlinePlayerHero(Vector2f pos, GameView view) {
+		super(pos, view);
+		actPos = pos;
+	}
+	
+	@Override
+	public void tick() {
+		super.tick();
+	}
+	
+	@Override
+	public void draw() {
+		Renderer.imageBufferGraphics.drawImage(texture.bufferedImage, 
+				(int)(actPos.x - size.x/2.0f), 
+				(int)(actPos.y + size.y/2.0f), (int)size.x, -(int)size.y, 
+				null);
+	}
+}
