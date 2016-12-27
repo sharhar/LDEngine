@@ -17,6 +17,7 @@ public class PlayerHero extends Hero{
 	protected GameView view;
 	protected boolean attacked = false;
 	private int jumps = 0;
+	private int dir = 0;
 
 	public PlayerHero(Vector2f pos, GameView view) {
 		super(pos);
@@ -40,7 +41,7 @@ public class PlayerHero extends Hero{
 				pos.x += speed * Game.deltaTime;
 			}
 			
-			this.texture = tex[1];
+			dir = 1;
 			ar = (float) Math.PI;
 		}
 		
@@ -51,7 +52,7 @@ public class PlayerHero extends Hero{
 				pos.x -= speed * Game.deltaTime;
 			}
 			
-			this.texture = tex[0];
+			dir = 0;
 			ar = 0;
 		}
 		
@@ -75,6 +76,12 @@ public class PlayerHero extends Hero{
 		
 		if(!Keyboard.keys[KeyEvent.VK_UP]) {
 			jumped = false;
+		}
+		
+		if(attack.size.x > 0) {
+			texID = dir + 2;
+		} else {
+			texID = dir;
 		}
 		
 		otherTick();

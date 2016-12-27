@@ -10,6 +10,6 @@ public class OnlineHero extends Hero{
 	
 	@Override
 	public void tick() {
-		
+		ar = (float) (Math.PI * (texID%2));
 	}
 }

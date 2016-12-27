@@ -10,6 +10,7 @@ import game.Game;
 public abstract class Hero extends QuadAA{
 	
 	public static Texture[] tex;
+	public int texID = 0;
 	private static int size_x = 50;
 	private static int size_y = 50;
 	public Quad attack = null;
@@ -24,9 +25,11 @@ public abstract class Hero extends QuadAA{
 		av[2] = new Vertex( 2,  1, 0, 1, new Vector2f(1, 0));
 		av[3] = new Vertex( 2, -1, 0, 1, new Vector2f(1, 1));
 		
-		tex = new Texture[2];
+		tex = new Texture[4];
 		tex[0] = new Texture("/PlayerRight.png");
 		tex[1] = new Texture("/PlayerLeft.png");
+		tex[2] = new Texture("/PlayerShoutRight.png");
+		tex[3] = new Texture("/PlayerShoutLeft.png");
 		
 		attackTexture = new Texture("/Attack.png");
 	}
@@ -44,6 +47,8 @@ public abstract class Hero extends QuadAA{
 	
 	@Override
 	public void draw() {
+		this.texture = tex[texID];
+		
 		super.draw();
 		
 		if(attackTime > 0.1f) {

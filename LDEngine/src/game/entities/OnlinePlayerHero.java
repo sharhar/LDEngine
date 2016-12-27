@@ -11,11 +11,14 @@ public class OnlinePlayerHero extends PlayerHero{
 	
 	public Vector2f actPos;
 	public Vector2f posStore;
+	public int acttexID;
+	public int storetexID;
 	
 	public OnlinePlayerHero(Vector2f pos, GameView view) {
 		super(pos, view);
 		actPos = new Vector2f(pos);
 		posStore = new Vector2f(pos);
+		acttexID = texID;
 	}
 	
 	@Override
@@ -26,7 +29,13 @@ public class OnlinePlayerHero extends PlayerHero{
 		pos.x = actPos.x;
 		pos.y = actPos.y;
 		
+		storetexID = texID;
+		texID = acttexID;
+		
 		super.tick();
+		
+		acttexID = texID;
+		texID = storetexID;
 		
 		actPos.x = pos.x;
 		actPos.y = pos.y;

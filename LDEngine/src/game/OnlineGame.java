@@ -24,7 +24,7 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 	
 	volatile private Hero[] heros = null;
 	int id = -1;
-	private float[] fd = new float[2];
+	private float[] fd = new float[3];
 	private float[] poss = null;
 	
 	public OnlineGame(int port) {
@@ -60,6 +60,7 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 					
 					fd[0] = hr.actPos.x;
 					fd[1] = hr.actPos.y;
+					fd[2] = (float) hr.acttexID;
 					
 					client.sendData(ByteUtils.float2Byte(fd));
 				}
@@ -102,8 +103,9 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 		
 		if(poss != null) {
 			for(int i = 0;i < heros.length;i++) {
-				heros[i].pos.x = poss[i*2+0];
-				heros[i].pos.y = poss[i*2+1];
+				heros[i].pos.x = poss[i*3+0];
+				heros[i].pos.y = poss[i*3+1];
+				heros[i].texID = (int)poss[i*3+2];
 			}
 		}
 		
@@ -129,7 +131,7 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 	}
 	
 	public void receivedData(byte[] data) {
-		float[] pos = ByteUtils.byte2Float(data, heros.length*2);
+		float[] pos = ByteUtils.byte2Float(data, heros.length*3);
 		
 		if(pos[0] == Float.MAX_VALUE) {
 			heros[data[4]].attack();

@@ -26,7 +26,7 @@ public class GameServer implements TcpServerCallback, UdpServerCallback {
 		this.port = port;
 		name = "Game " + port;
 		
-		poss = new float[2*playerNum];
+		poss = new float[3*playerNum];
 		
 		new Thread(() -> {
 			while(true) {
@@ -54,14 +54,15 @@ public class GameServer implements TcpServerCallback, UdpServerCallback {
 	}
 	
 	public void receivedData(int id, byte[] data) {
-		float[] pos = ByteUtils.byte2Float(data, 2);
+		float[] pos = ByteUtils.byte2Float(data, 3);
 		
 		if(pos[0] == Float.MAX_VALUE) {
 			data[4] = (byte)id;
 			udpServer.sendAll(data);
 		} else {			
-			poss[id*2+0] = pos[0];
-			poss[id*2+1] = pos[1];
+			poss[id*3+0] = pos[0];
+			poss[id*3+1] = pos[1];
+			poss[id*3+2] = pos[2];
 		}
 	}
 }
