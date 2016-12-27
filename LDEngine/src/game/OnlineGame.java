@@ -9,6 +9,7 @@ import engine.rendering.shapes.QuadAA;
 import engine.utils.math.Vector2f;
 import game.entities.Hero;
 import game.entities.Level;
+import game.entities.OnlineHero;
 import game.entities.OnlinePlayerHero;
 import net.ddns.sharhar.tcp.TcpClient;
 import net.ddns.sharhar.tcp.TcpClientCallback;
@@ -55,21 +56,16 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 		new Thread(() -> {
 			while(true) {
 				if(heros != null) {
-					OnlinePlayerHero hr = (OnlinePlayerHero)heros[0];
+					OnlinePlayerHero hr = (OnlinePlayerHero)heros[id];
 					
 					fd[0] = hr.actPos.x;
 					fd[1] = hr.actPos.y;
 					
 					client.sendData(ByteUtils.float2Byte(fd));
-					
-					if(poss != null) {
-						heros[0].pos.x = poss[id*2+0];
-						heros[0].pos.y = poss[id*2+1];
-					}
 				}
 				
 				try {
-					Thread.sleep(8);
+					Thread.sleep(4);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -89,10 +85,12 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 			
 			Hero[] temp = new Hero[num];
 			
-			temp[0] = new OnlinePlayerHero(level.spawns[0], this);
-			
-			for(int i = 1;i < temp.length;i++) {
-				//heros[i] = new AIHero(level.spawns[i%level.spawns.length]);
+			for(int i = 0;i < temp.length;i++) {
+				if(i == id) {
+					temp[i] = new OnlinePlayerHero(level.spawns[i%level.spawns.length], this);
+				} else {
+					temp[i] = new OnlineHero(level.spawns[i%level.spawns.length]);
+				}
 			}
 			
 			heros = temp;
@@ -101,6 +99,13 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 	
 	public void render() {
 		level.render();
+		
+		if(poss != null) {
+			for(int i = 0;i < heros.length;i++) {
+				heros[i].pos.x = poss[i*2+0];
+				heros[i].pos.y = poss[i*2+1];
+			}
+		}
 		
 		if(heros != null) {
 			for(Hero h:heros) {
@@ -117,7 +122,19 @@ public class OnlineGame extends GameView implements TcpClientCallback, UdpClient
 		
 	}
 	
+	public void attack() {
+		float[] fdata = {Float.MAX_VALUE};
+		byte[] data = ByteUtils.float2Byte(fdata);
+		client.sendData(data);
+	}
+	
 	public void receivedData(byte[] data) {
-		poss = ByteUtils.byte2Float(data, heros.length*2);
+		float[] pos = ByteUtils.byte2Float(data, heros.length*2);
+		
+		if(pos[0] == Float.MAX_VALUE) {
+			heros[data[4]].attack();
+		} else {
+			poss = pos;
+		}
 	}
 }

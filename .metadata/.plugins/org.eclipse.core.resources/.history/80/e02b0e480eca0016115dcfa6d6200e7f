@@ -1,7 +1,0 @@
-package game.entities;
-
-import engine.rendering.shapes.QuadAA;
-
-public class Player extends QuadAA{
-	
-}

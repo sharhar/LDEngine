@@ -18,13 +18,23 @@ public class Quad extends QuadAA{
 		sverts[3] = new Vertex(  0.5f, -0.5f, 0, 1, new Vector2f(1, 1));
 	}
 	
-	public static Vertex[] vverts;
+	public static Vertex[] vverts = new Vertex[4];
 	
 	public float r;
+	private Vertex[] psverts;
+	
+	public Quad(Vector2f pos, Vector2f size, Texture texture, float r, Vertex[] va) {
+		super(pos, size, texture);
+		this.r = r;
+		
+		psverts = va;
+	}
 	
 	public Quad(Vector2f pos, Vector2f size, Texture texture, float r) {
 		super(pos, size, texture);
 		this.r = r;
+		
+		psverts = sverts;
 	}
 	
 	public void draw() {
@@ -35,10 +45,10 @@ public class Quad extends QuadAA{
 			
 		Matrix4f mat = Renderer.projection.mult(transformation);
 			
-		vverts[0] = mat.mult(sverts[0]);
-		vverts[1] = mat.mult(sverts[1]);
-		vverts[2] = mat.mult(sverts[2]);
-		vverts[3] = mat.mult(sverts[3]);
+		vverts[0] = mat.mult(psverts[0]);
+		vverts[1] = mat.mult(psverts[1]);
+		vverts[2] = mat.mult(psverts[2]);
+		vverts[3] = mat.mult(psverts[3]);
 			
 		Renderer.drawTriSmartTextured(vverts[0], vverts[1], vverts[2], texture);
 		Renderer.drawTriSmartTextured(vverts[0], vverts[3], vverts[2], texture);
@@ -53,10 +63,10 @@ public class Quad extends QuadAA{
 			
 		Matrix4f mat = Renderer.projection.mult(transformation);
 		
-		colVerts[0] = mat.mult(sverts[0]);
-		colVerts[1] = mat.mult(sverts[1]);
-		colVerts[2] = mat.mult(sverts[2]);
-		colVerts[3] = mat.mult(sverts[3]);
+		colVerts[0] = mat.mult(psverts[0]);
+		colVerts[1] = mat.mult(psverts[1]);
+		colVerts[2] = mat.mult(psverts[2]);
+		colVerts[3] = mat.mult(psverts[3]);
 	}
 	
 	@Override

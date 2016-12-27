@@ -1,7 +1,11 @@
 package game.entities;
 
+import java.awt.event.KeyEvent;
+
+import engine.input.Keyboard;
 import engine.utils.math.Vector2f;
 import game.GameView;
+import game.OnlineGame;
 
 public class OnlinePlayerHero extends PlayerHero{
 	
@@ -29,5 +33,19 @@ public class OnlinePlayerHero extends PlayerHero{
 		
 		pos.x = posStore.x;
 		pos.y = posStore.y;
+	}
+	
+	@Override
+	public void otherTick() {
+		if(Keyboard.keys[KeyEvent.VK_Z] && !attacked) {
+			OnlineGame online = (OnlineGame)this.view;
+			online.attack();
+			
+			attacked = true;
+		}
+		
+		if(!Keyboard.keys[KeyEvent.VK_Z]) {
+			attacked = false;
+		}
 	}
 }

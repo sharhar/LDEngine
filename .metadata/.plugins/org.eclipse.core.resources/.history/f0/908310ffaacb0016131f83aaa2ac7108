@@ -1,0 +1,33 @@
+package game.entities;
+
+import engine.utils.math.Vector2f;
+import game.GameView;
+
+public class OnlinePlayerHero extends PlayerHero{
+	
+	public Vector2f actPos;
+	public Vector2f posStore;
+	
+	public OnlinePlayerHero(Vector2f pos, GameView view) {
+		super(pos, view);
+		actPos = new Vector2f(pos);
+		posStore = new Vector2f(pos);
+	}
+	
+	@Override
+	public void tick() {
+		posStore.x = pos.x;
+		posStore.y = pos.y;
+		
+		pos.x = actPos.x;
+		pos.y = actPos.y;
+		
+		super.tick();
+		
+		actPos.x = pos.x;
+		actPos.y = pos.y;
+		
+		pos.x = posStore.x;
+		pos.y = posStore.y;
+	}
+}

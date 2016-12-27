@@ -1,0 +1,9 @@
+package game.entities;
+
+public class OnlineHero extends Hero{
+
+	public void tick() {
+		
+	}
+
+}

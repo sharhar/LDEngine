@@ -99,7 +99,7 @@ public class Renderer {
 						
 						depth = (int)((v1.z * bc.x + v2.z *bc.y + v3.z * bc.z)*-1000);
 						
-						if(depth < depthBufferData[yp * w + xp]) {
+						if(depth < depthBufferData[yp * w + xp] && (texture.data[tx][ty] & 0xff000000) != 0) {
 							imageBufferData[yp * w + xp] = texture.data[tx][ty];
 							depthBufferData[yp * w + xp] = depth;
 						}

@@ -1,7 +1,0 @@
-package server;
-
-import net.ddns.sharhar.tcp.TcpServerCallback;
-
-public class GameServer implements TcpServerCallback{
-
-}

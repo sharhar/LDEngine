@@ -30,6 +30,8 @@ public class GameController {
 	public static View view = null;
 	
 	public static void init() {
+		Game.printFPS = false;
+		
 		connectionFont = new Font("Arial", Font.PLAIN, 20);
 		titleFont = new Font("Arial", Font.BOLD, 54);
 		

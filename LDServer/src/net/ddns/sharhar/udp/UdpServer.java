@@ -1,7 +1,6 @@
 package net.ddns.sharhar.udp;
 
 import java.io.IOException;
-import java.net.BindException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -111,11 +110,9 @@ public class UdpServer implements Runnable{
 	public void run() {
 		try {
 			socket = new DatagramSocket(port);
-		} catch(BindException e) {
+		} catch(IOException e) {
 			System.err.println("Socket already boud!");
 			System.exit(-1);
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		while (running) {
 			try {

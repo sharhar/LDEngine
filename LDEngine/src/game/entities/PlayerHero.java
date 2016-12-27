@@ -9,16 +9,25 @@ import game.GameView;
 
 public class PlayerHero extends Hero{
 	
+	private int maxJumps = 2;
 	float jumpHeight = 200;
 	float G = -8*jumpHeight;
 	float yVel = 0;
 	private boolean jumped = false;
-	private GameView view;
+	protected GameView view;
+	protected boolean attacked = false;
+	private int jumps = 0;
 
 	public PlayerHero(Vector2f pos, GameView view) {
 		super(pos);
 		
 		this.view = view;
+		
+	}
+	
+	@Override
+	public void draw() {
+		super.draw();
 	}
 	
 	public void tick() {
@@ -32,6 +41,7 @@ public class PlayerHero extends Hero{
 			}
 			
 			this.texture = tex[1];
+			ar = (float) Math.PI;
 		}
 		
 		if(Keyboard.keys[KeyEvent.VK_RIGHT]) {
@@ -42,6 +52,7 @@ public class PlayerHero extends Hero{
 			}
 			
 			this.texture = tex[0];
+			ar = 0;
 		}
 		
 		yVel += G * Game.deltaTime;
@@ -50,16 +61,33 @@ public class PlayerHero extends Hero{
 		
 		if(view.level.col(this)) {
 			pos.y -= yVel * Game.deltaTime;
+			if(yVel < 0) {
+				jumps = 0;	
+			}
 			yVel = 0;
 		}
 		
-		if(Keyboard.keys[KeyEvent.VK_UP] && !jumped) {
+		if(Keyboard.keys[KeyEvent.VK_UP] && !jumped && jumps < maxJumps) {
 			yVel = 4 * jumpHeight;
+			jumps++;
 			jumped = true;
 		}
 		
 		if(!Keyboard.keys[KeyEvent.VK_UP]) {
 			jumped = false;
+		}
+		
+		otherTick();
+	}
+	
+	public void otherTick() {
+		if(Keyboard.keys[KeyEvent.VK_Z] && !attacked) {
+			attack();
+			attacked = true;
+		}
+		
+		if(!Keyboard.keys[KeyEvent.VK_Z]) {
+			attacked = false;
 		}
 	}
 }

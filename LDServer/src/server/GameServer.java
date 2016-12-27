@@ -13,7 +13,7 @@ public class GameServer implements TcpServerCallback, UdpServerCallback {
 	public UdpServer udpServer;
 	public String name;
 	public int port;
-	public int playerNum = 1;
+	public int playerNum = 2;
 	public float[] poss;
 	
 	public GameServer(int port) {
@@ -32,7 +32,7 @@ public class GameServer implements TcpServerCallback, UdpServerCallback {
 			while(true) {
 				udpServer.sendAll(ByteUtils.float2Byte(poss));
 				try {
-					Thread.sleep(8);
+					Thread.sleep(4);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,7 +56,12 @@ public class GameServer implements TcpServerCallback, UdpServerCallback {
 	public void receivedData(int id, byte[] data) {
 		float[] pos = ByteUtils.byte2Float(data, 2);
 		
-		poss[id*2+0] = pos[0];
-		poss[id*2+1] = pos[1];
+		if(pos[0] == Float.MAX_VALUE) {
+			data[4] = (byte)id;
+			udpServer.sendAll(data);
+		} else {			
+			poss[id*2+0] = pos[0];
+			poss[id*2+1] = pos[1];
+		}
 	}
 }

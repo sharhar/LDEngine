@@ -1,0 +1,64 @@
+package game.entities;
+
+import engine.rendering.Texture;
+import engine.rendering.Vertex;
+import engine.rendering.shapes.Quad;
+import engine.rendering.shapes.QuadAA;
+import engine.utils.math.Vector2f;
+import game.Game;
+
+public abstract class Hero extends QuadAA{
+	
+	public static Texture[] tex;
+	private static int size_x = 50;
+	private static int size_y = 50;
+	public Quad attack = null;
+	protected static Vertex[] av = new Vertex[4];
+	private static Texture attackTexture;
+	
+	static {
+		av[0] = new Vertex( 1, -1, 0, 1, new Vector2f(0, 1));
+		av[1] = new Vertex( 1,  1, 0, 1, new Vector2f(0, 0));
+		av[2] = new Vertex( 2,  1, 0, 1, new Vector2f(1, 0));
+		av[3] = new Vertex( 2, -1, 0, 1, new Vector2f(1, 1));
+		
+		tex = new Texture[2];
+		tex[0] = new Texture("/PlayerRight.png");
+		tex[1] = new Texture("/PlayerLeft.png");
+		
+		attackTexture = new Texture("/Attack.png");
+	}
+
+	public Hero(Vector2f pos) {
+		super(pos, new Vector2f(size_x, size_y), tex[0]);
+		
+		this.attack = new Quad(pos, new Vector2f(0, 0), attackTexture, 0, av);
+	}
+	
+	@Override
+	public String toString() {
+		return pos.x + " " + pos.y + "\t\t" + pos.y;
+	}
+	
+	@Override
+	public void draw() {
+		super.draw();
+		
+		if(attack.size.x > 0) {
+			attack.size.add(new Vector2f(500 * Game.deltaTime, 500 * Game.deltaTime));
+			attack.draw();
+		}
+	}
+	
+	public void attack() {
+		attack.size.x = 20;
+		attack.size.y = 20;
+		
+		attack.pos.x = pos.x;
+		attack.pos.y = pos.y;
+		
+		attack.r = ar;
+	}
+	
+	abstract public void tick();
+}

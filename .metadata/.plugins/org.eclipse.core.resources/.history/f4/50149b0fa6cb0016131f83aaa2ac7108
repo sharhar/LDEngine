@@ -1,0 +1,119 @@
+package game.entities;
+
+import java.awt.event.KeyEvent;
+
+import engine.input.Keyboard;
+import engine.rendering.Texture;
+import engine.rendering.Vertex;
+import engine.rendering.shapes.Quad;
+import engine.utils.math.Vector2f;
+import game.Game;
+import game.GameView;
+
+public class PlayerHero extends Hero{
+	
+	private int maxJumps = 2;
+	float jumpHeight = 200;
+	float G = -8*jumpHeight;
+	float yVel = 0;
+	private boolean jumped = false;
+	private GameView view;
+	private boolean attacked = false;
+	public Quad attack = null;
+	private float attackTime = 0;
+	private static Vertex[] av = new Vertex[4];
+	private static Texture attackTexture;
+	private float ar = 0;
+	private int jumps = 0;
+	
+	static {
+		av[0] = new Vertex( 1, -1, 0, 1, new Vector2f(0, 1));
+		av[1] = new Vertex( 1,  1, 0, 1, new Vector2f(0, 0));
+		av[2] = new Vertex( 2,  1, 0, 1, new Vector2f(1, 0));
+		av[3] = new Vertex( 2, -1, 0, 1, new Vector2f(1, 1));
+		
+		attackTexture = new Texture("/Attack.png");
+	}
+
+	public PlayerHero(Vector2f pos, GameView view) {
+		super(pos);
+		
+		this.view = view;
+	}
+	
+	@Override
+	public void draw() {
+		super.draw();
+		
+		if(attack != null) {
+			attack.size.add(new Vector2f(500 * Game.deltaTime, 500 * Game.deltaTime));
+			
+			attack.draw();
+		}
+	}
+	
+	public void tick() {
+		float speed = 400;
+		
+		if(Keyboard.keys[KeyEvent.VK_LEFT]) {
+			pos.x -= speed * Game.deltaTime;
+			
+			if(view.level.col(this)) {
+				pos.x += speed * Game.deltaTime;
+			}
+			
+			this.texture = tex[1];
+			ar = (float) Math.PI;
+		}
+		
+		if(Keyboard.keys[KeyEvent.VK_RIGHT]) {
+			pos.x += speed * Game.deltaTime;
+			
+			if(view.level.col(this)) {
+				pos.x -= speed * Game.deltaTime;
+			}
+			
+			this.texture = tex[0];
+			ar = 0;
+		}
+		
+		yVel += G * Game.deltaTime;
+		
+		pos.y += yVel * Game.deltaTime;
+		
+		if(view.level.col(this)) {
+			pos.y -= yVel * Game.deltaTime;
+			if(yVel < 0) {
+				jumps = 0;	
+			}
+			yVel = 0;
+		}
+		
+		if(Keyboard.keys[KeyEvent.VK_UP] && !jumped && jumps < maxJumps) {
+			yVel = 4 * jumpHeight;
+			jumps++;
+			jumped = true;
+		}
+		
+		if(!Keyboard.keys[KeyEvent.VK_UP]) {
+			jumped = false;
+		}
+		
+		if(Keyboard.keys[KeyEvent.VK_Z] && !attacked) {
+			attack = new Quad(pos, new Vector2f(20, 20), attackTexture, ar, av);
+			attackTime = 0;
+			attacked = true;
+		}
+		
+		attackTime += Game.deltaTime;
+		
+		if(!Keyboard.keys[KeyEvent.VK_Z]) {
+			attacked = false;
+		}
+		
+		if(attackTime > 0.1f) {
+			attackTime = 0;
+			attack = null;
+		}
+	}
+}
